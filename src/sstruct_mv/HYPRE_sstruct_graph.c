@@ -610,7 +610,9 @@ HYPRE_SStructGraphAssemble( HYPRE_SStructGraph graph )
       to_index = hypre_SStructGraphEntryToIndex(new_entry);
       
       /* compute location (rank) for Uventry */
-      hypre_SStructGraphGetUVEntryRank(graph, part, var, index, &Uverank);
+       hypre_SStructGridFindBoxManEntry(grid, part, index, var, &boxman_entry);
+       hypre_SStructBoxManEntryGetGlobalRank(boxman_entry, index, &Uverank, graph->type);
+       //hypre_SStructGraphGetUVEntryRank(graph, part, var, index, &Uverank);
 
       if (Uverank > -1)
       {
